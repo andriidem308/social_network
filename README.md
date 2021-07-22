@@ -1,11 +1,31 @@
 # social_network
 
-## Added users to the database:
-user01
+## Firstly, you need to install all packages:
+```sh
+pip3 install -r requirements.txt
+```
 
-user02
+## Then you should to run the social network with this command:
 
-user03
+```sh
+make run
+```
+or
+
+```sh
+python3 manage.py runserver
+```
 
 
-### all of them has the similar password: asdfqwer1234
+## Also, I added some users to the database:
+- user01
+- user02
+- user03
+
+
+all of them has the similar password: **asdfqwer1234**
+
+## Admin login:
+username: admin
+
+password: 1
