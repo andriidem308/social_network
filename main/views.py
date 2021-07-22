@@ -93,9 +93,6 @@ def last_activity(request, username):
     """Show when the specific user log in and was active last time."""
     user = User.objects.get(username=username)
     user_profile = UserProfile.objects.get(user__username=username)
-    print(user_profile.user)
-    print(user_profile.name)
-    print(user_profile.last_visit)
     last_login_time = user.last_login
     last_visit_time = user_profile.last_visit
 
