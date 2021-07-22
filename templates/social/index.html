@@ -1,0 +1,60 @@
+{% extends 'social/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10 col-sm-12 text-left">
+            {% if user.is_authenticated %}
+                <div class="row justify-content-center mt-3">
+                    <div class="col-md-5 col-sm-12 border-bottom">
+                        <h5>Something new?</h5>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-3 mb-5">
+                    <div class="col-md-5 col-sm-12 border-bottom">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-dark mt-3">Submit!</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            <h1 class="display-5">Recent news</h1>
+
+            {% for post in post_list %}
+                <div class="row justify-content-left mt-3">
+                    <div class="col-md-5 col-sm-12 position-relative">
+                        <p class="post-text">
+{#                            <a class="text-primary post-link" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}#}
+                            <a class="text-dark post-link" href="#">@{{ post.author }}</a> posted {{ post.created_on }}
+                        </p>
+                        <div class="shared-post position-relative pt-3 ">
+                            <div class="body">
+                                <p class="text-justify">{{ post.body }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+{#                            <form method="POST" action="#">#}
+                            <form method="POST" action="{% url 'like' post.pk %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                                    <i class="far fa-heart"> <span>{{ post.likes.all.count }} likes</span></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

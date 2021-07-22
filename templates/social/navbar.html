@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'index' %}">Social Network</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            </ul>
+
+            {% if user.is_authenticated %}
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="fas fa-user"></i></a>
+                    <ul class="dropdown-menu bg-dark justify-content-left">
+                        <li><a class="dropdown-item text-light" href="#">Profile</a></li>
+                        <li><a class="dropdown-item text-light" href="{% url 'account_logout' %}">Sign Out</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="nav-item d-flex justify-content-center">
+                    <a href="{% url 'account_login' %}" class="text-light px-2">Log In</a>
+                    <a href="{% url 'account_signup' %}" class="text-light px-2">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
