@@ -9,19 +9,15 @@ from django.utils import timezone
 class Post(models.Model):
     """Post Model class."""
 
-    shared_body = models.TextField(blank=True, null=True)
     body = models.TextField()
     created_on = models.DateTimeField(default=timezone.now)
-    shared_on = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    shared_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
-    dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
 
     class Meta:
         """Post Model class meta."""
 
-        ordering = ['-created_on', '-shared_on']
+        ordering = ['-created_on', ]
 
 
 class UserProfile(models.Model):
